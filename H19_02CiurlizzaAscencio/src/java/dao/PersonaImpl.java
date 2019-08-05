@@ -36,7 +36,7 @@ public class PersonaImpl extends Conexion implements IPersona {
 
     @Override
     public void modificar(Persona persona) throws Exception {
-        String sql = "UPDATE PERSONA.PERSONA SET NOMPER=?,APEPER=?,DNIPER=?,TIPOPER=?,CODSUC=?,DIRPER=?,CELPER=?,SEXPER=? WHERE CODPER=?";
+        String sql = "UPDATE PERSONA.PERSONA SET NOMPER=?,APEPER=?,DNIPER=?,TIPOPER=?,CODSUC=?,DIRPER=?,CELPER=?,SEXPER=?,ESTPER=? WHERE CODPER=?";
         try {
             PreparedStatement ps = this.conectar().prepareStatement(sql);
             ps.setString(1, persona.getNOMPER());
@@ -61,7 +61,7 @@ public class PersonaImpl extends Conexion implements IPersona {
 
     @Override
     public void eliminar(Persona persona) throws Exception {
-        String sql = "UPDATE PERSONA.PERSONA SET SEXPER=? WHERE CODPER=?";
+        String sql = "UPDATE PERSONA.PERSONA SET ESTPER=? WHERE CODPER=?";
         try {
             PreparedStatement ps = this.conectar().prepareStatement(sql);
             ps.setString(1, "I");

@@ -13,7 +13,7 @@ public class Conexion {
     public Connection conectar(){
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            cnx = DriverManager.getConnection("jdbc:sqlserver://ascencio.database.windows.net;databaseName=VENTAS_HACKHATON","ciurlizza","DeejayCermixx#14");
+            cnx = DriverManager.getConnection("jdbc:sqlserver://DJ;databaseName=VENTAS_HACKHATON","Admin","Admin");
         } catch (Exception e) {
             System.out.println("Error :'v");
         }

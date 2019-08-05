@@ -9,11 +9,11 @@
 
     </h:head>
     <h:body>
-
         <h:form id="Menu">
             <p:stack expanded="true">
-                <p:menuitem value="Persona" url="../vistas/PersonaV.xhtml"/>
-                <p:menuitem value="Sucursal" url="../vistas/SucursalV.xhtml"/>
+                <p:menuitem value="Persona" url="/faces/vistas/PersonaV.xhtml"/>
+                <p:menuitem value="Sucursal" url="/faces/vistas/SucursalV.xhtml"/>
+                <p:menuitem value="Producto" url="/faces/vistas/EquipoV.xhtml"/>
             </p:stack>
         </h:form>
 
@@ -48,6 +48,7 @@
                     </p:selectOneRadio>
                 </p:panelGrid>
                 <p:commandButton value="Registrar" actionListener="#{personaC.registrar()}" update=":dos,mensaje,Datos"/>
+                <p:commandButton value="limpiar" actionListener="#{personaC.limpiar()}" update="uno"/>
             </center>
         </h:form>
 
@@ -66,7 +67,9 @@
                     <h:outputText value="#{lista.DNIPER}"/>
                 </p:column>
                 <p:column headerText="TIPO">
-                    <h:outputText value="#{lista.TIPOPER}"/>
+                    <h:outputText value="Administrador" rendered="#{lista.TIPOPER eq 'A'}"/>
+                    <h:outputText value="Jefe de Sucursal" rendered="#{lista.TIPOPER eq 'J'}"/>
+                    <h:outputText value="Vendedor" rendered="#{lista.TIPOPER eq 'V'}"/>
                 </p:column>
                 <p:column headerText="SUCURSAL">
                     <h:outputText value="#{lista.CODSUC}"/>
@@ -78,11 +81,14 @@
                     <h:outputText value="#{lista.CELPER}"/>
                 </p:column>
                 <p:column headerText="SEXO">
-                    <h:outputText value="#{lista.SEXPER}"/>
+                    <h:outputText value="Femenino" rendered="#{lista.SEXPER eq 'F'}"/>
+                    <h:outputText value="Masculino" rendered="#{lista.SEXPER eq 'M'}"/>
                 </p:column>
 
                 <p:column headerText="ACCIONES">
-                    <p:commandButton value="Modificar" oncomplete="PF('WDialogoE').show();"/>
+                    <p:commandButton value="Modificar" oncomplete="PF('WDialogoE').show();" update=":Dialogo">
+                        <f:setPropertyActionListener value="#{lista}" target="#{personaC.persona}"/>
+                    </p:commandButton>
                     <p:commandButton value="Eliminar" actionListener="#{personaC.eliminar(lista)}"/>
                 </p:column>
             </p:dataTable>
@@ -110,15 +116,14 @@
                         <f:selectItem itemLabel="Femenino" itemValue="F"/>
                     </p:selectOneRadio>                    
                 </p:panelGrid>
-                <p:commandButton value="Modificar" actionListener="#{personaC.modificar()}" update=":dos">
-                    <f:setPropertyActionListener value="#{lista}" target="#{personaC.persona}"/>
+                <p:commandButton value="Modificar" actionListener="#{personaC.modificar()}" update=":dos,Dialogo,:uno">
                     <p:confirm header="Confirmacion" message="¿Confirmar?"/>
                 </p:commandButton>
                 <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('WDialogoE').hide();"/>
             </p:dialog>
         </h:form>        
 
-        <h:form id="tres">
+        <h:form>
             <p:confirmDialog global="true">
                 <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes"/>
                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"/>
