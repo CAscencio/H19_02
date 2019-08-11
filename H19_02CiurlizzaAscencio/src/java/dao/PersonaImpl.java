@@ -8,6 +8,9 @@ import java.util.List;
 import modelo.Persona;
 
 public class PersonaImpl extends Conexion implements IPersona {
+    
+    
+    private Persona persona;
 
     @Override
     public void registrar(Persona persona) throws Exception {
@@ -108,5 +111,37 @@ public class PersonaImpl extends Conexion implements IPersona {
         }
         return listado;
     }
+    
+    
+    
+     public Persona buscarDatos(String dni){
+        persona = new Persona();
+        String sql ="SELECT CODPER,NOMPER,APEPER FROM PERSONA.PERSONA WHERE DNIPER="+dni;
+        try {
+            Statement st = this.conectar().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                persona.setCODPER(rs.getInt("CODPER"));
+                persona.setNOMPER(rs.getString("NOMPER"));
+                persona.setAPEPER(rs.getString("APEPER"));
+            }
+            return persona;
+        } catch (Exception e) {
+            System.out.println("Error al Buscar Cliente");
+            return null;
+        }      
+        
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+     
+     
+     
 
 }

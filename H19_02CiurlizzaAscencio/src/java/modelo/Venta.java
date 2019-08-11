@@ -1,9 +1,6 @@
 package modelo;
 
-/**
- *
- * @author Usuario
- */
+
 public class Venta {
 
     private int CODVENT;

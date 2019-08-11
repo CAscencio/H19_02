@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Login</title>
+        <link href="resource/css/login.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    
+    <h:body>   
+        <div class="login">
+            <h:form>  
+                <p:growl id="mensaje" sticky="true" showDetail="true" life="3000" />
+
+                <p:panel header="Login Sis. Ventas" widgetVar="dlg" style="text-align: center">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="usuario" value="USUARIO:" />
+                        <p:inputText id="usuario" placeholder="usuario" value="#{loginC.user}" required="true" label="username"/>
+
+                        <h:outputLabel for="password" value="CONSTRASEÑA:" />
+                        <p:password id="password" placeholder="password" value="#{loginC.pass}" required="true" label="password" />
+
+                        <f:facet name="footer">
+                            <p:commandButton value="Login" update="mensaje" actionListener="#{loginC.ingresar()}"
+                                              oncomplete="handleLoginRequest(xhr, status, args)"/>
+                            <p:commandButton value="Cancelar"/> 
+                        </f:facet>  
+                    </h:panelGrid>
+                </p:panel>    
+            </h:form>
+        </div>
+        
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed || !args.loggedIn) {
+                    PF('dlg').jq.effect("shake", {times: 5}, 100);
+                } else {
+                    PF('dlg').hide();
+                    $('#loginLink').fadeOut();
+                }
+            }
+        </script>
+    </h:body>
+</html>
+

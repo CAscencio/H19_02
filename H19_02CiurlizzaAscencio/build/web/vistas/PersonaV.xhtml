@@ -3,132 +3,131 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>  
 
     </h:head>
     <h:body>
-        <h:form id="Menu">
-            <p:stack expanded="true">
-                <p:menuitem value="Persona" url="/faces/vistas/PersonaV.xhtml"/>
-                <p:menuitem value="Sucursal" url="/faces/vistas/SucursalV.xhtml"/>
-                <p:menuitem value="Producto" url="/faces/vistas/EquipoV.xhtml"/>
-            </p:stack>
-        </h:form>
+        <ui:composition template="./../Plantilla/Plantilla.xhtml">
 
-        <center>
-            <h1>Registro de Personal</h1>
-        </center>
-        <p:growl autoUpdate="true" showDetail="true" id="mensaje"/>
-        <h:form id="uno">
-            <center>
-                <p:panelGrid id="Datos" columns="4">
-                    <p:outputLabel value="NOMBRES :"/><p:inputText value="#{personaC.persona.NOMPER}"/>
-                    <p:outputLabel value="APELLIDOS :"/><p:inputText value="#{personaC.persona.APEPER}"/>
-                    <p:outputLabel value="DNI :"/><p:inputText value="#{personaC.persona.DNIPER}" maxlength="8"/>
-                    <p:outputLabel value="TIPO :"/>
-                    <p:selectOneMenu value="#{personaC.persona.TIPOPER}">
-                        <f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}" noSelectionOption="true"/>
-                        <f:selectItem itemLabel="Administrador" itemValue="A"/>
-                        <f:selectItem itemLabel="Jefe de Sucursal" itemValue="J"/>
-                        <f:selectItem itemLabel="Vendedor" itemValue="V"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel value="SUCURSAL :"/>
-                    <p:selectOneMenu value="#{personaC.persona.CODSUC}">
-                        <f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}" noSelectionOption="true"/>
-                        <f:selectItems value="#{sucursalC.lsucursal}" var="sucursal" itemLabel="#{sucursal.NOMSUC}" itemValue="#{sucursal.CODSUC}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel value="DIRECCIÓN :"/><p:inputText value="#{personaC.persona.DIRPER}"/>
-                    <p:outputLabel value="CEL :"/><p:inputText value="#{personaC.persona.CELPER}" maxlength="9"/>
-                    <p:outputLabel value="SEXO :"/>
-                    <p:selectOneRadio value="#{personaC.persona.SEXPER}">
-                        <f:selectItem itemLabel="Masculino" itemValue="M"/>
-                        <f:selectItem itemLabel="Femenino" itemValue="F"/>
-                    </p:selectOneRadio>
-                </p:panelGrid>
-                <p:commandButton value="Registrar" actionListener="#{personaC.registrar()}" update=":dos,mensaje,Datos"/>
-                <p:commandButton value="limpiar" actionListener="#{personaC.limpiar()}" update="uno"/>
-            </center>
-        </h:form>
+            <ui:define name="content">
+                <center>
+                    <h1>Registro de Personal</h1>
+                </center>
+                <p:growl autoUpdate="true" showDetail="true" id="mensaje"/>
+                <h:form id="uno">
+                    <center>
+                        <p:panelGrid id="Datos" columns="4">
+                            <p:outputLabel value="NOMBRES :"/><p:inputText value="#{personaC.persona.NOMPER}"/>
+                            <p:outputLabel value="APELLIDOS :"/><p:inputText value="#{personaC.persona.APEPER}"/>
+                            <p:outputLabel value="DNI :"/><p:inputText value="#{personaC.persona.DNIPER}" maxlength="8"/>
+                            <p:outputLabel value="TIPO :"/>
+                            <p:selectOneMenu value="#{personaC.persona.TIPOPER}">
+                                <f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="Administrador" itemValue="A"/>
+                                <f:selectItem itemLabel="Jefe de Sucursal" itemValue="J"/>
+                                <f:selectItem itemLabel="Vendedor" itemValue="V"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="SUCURSAL :"/>
+                            <p:selectOneMenu value="#{personaC.persona.CODSUC}">
+                                <f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}" noSelectionOption="true"/>
+                                <f:selectItems value="#{sucursalC.lsucursal}" var="sucursal" itemLabel="#{sucursal.NOMSUC}" itemValue="#{sucursal.CODSUC}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="DIRECCIÓN :"/><p:inputText value="#{personaC.persona.DIRPER}"/>
+                            <p:outputLabel value="CEL :"/><p:inputText value="#{personaC.persona.CELPER}" maxlength="9"/>
+                            <p:outputLabel value="SEXO :"/>
+                            <p:selectOneRadio value="#{personaC.persona.SEXPER}">
+                                <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                            </p:selectOneRadio>
+                        </p:panelGrid>
+                        <p:commandButton value="Registrar" actionListener="#{personaC.registrar()}" update=":dos,mensaje,Datos"/>
+                        <p:commandButton value="limpiar" actionListener="#{personaC.limpiar()}" update="uno"/>
+                    </center>
+                </h:form>
 
-        <h:form id="dos">
-            <p:dataTable id="DatosL" paginator="true" value="#{personaC.lpersona}" var="lista">
-                <p:column headerText="N°" style="width:3px">
-                    <h:outputText value="#{lista.CODPER}"/>
-                </p:column>
-                <p:column headerText="NOMBRE">
-                    <h:outputText value="#{lista.NOMPER}"/>
-                </p:column>
-                <p:column headerText="APELLIDO">
-                    <h:outputText value="#{lista.APEPER}"/>
-                </p:column>
-                <p:column headerText="DNI">
-                    <h:outputText value="#{lista.DNIPER}"/>
-                </p:column>
-                <p:column headerText="TIPO">
-                    <h:outputText value="Administrador" rendered="#{lista.TIPOPER eq 'A'}"/>
-                    <h:outputText value="Jefe de Sucursal" rendered="#{lista.TIPOPER eq 'J'}"/>
-                    <h:outputText value="Vendedor" rendered="#{lista.TIPOPER eq 'V'}"/>
-                </p:column>
-                <p:column headerText="SUCURSAL">
-                    <h:outputText value="#{lista.CODSUC}"/>
-                </p:column>
-                <p:column headerText="DIRECCIÓN">
-                    <h:outputText value="#{lista.DIRPER}"/>
-                </p:column>
-                <p:column headerText="CEL">
-                    <h:outputText value="#{lista.CELPER}"/>
-                </p:column>
-                <p:column headerText="SEXO">
-                    <h:outputText value="Femenino" rendered="#{lista.SEXPER eq 'F'}"/>
-                    <h:outputText value="Masculino" rendered="#{lista.SEXPER eq 'M'}"/>
-                </p:column>
+                <h:form id="dos">
+                    <p:dataTable id="DatosL" paginator="true" value="#{personaC.lpersona}" var="lista">
+                        <p:column headerText="N°" style="width:3px">
+                            <h:outputText value="#{lista.CODPER}"/>
+                        </p:column>
+                        <p:column headerText="NOMBRE">
+                            <h:outputText value="#{lista.NOMPER}"/>
+                        </p:column>
+                        <p:column headerText="APELLIDO">
+                            <h:outputText value="#{lista.APEPER}"/>
+                        </p:column>
+                        <p:column headerText="DNI">
+                            <h:outputText value="#{lista.DNIPER}"/>
+                        </p:column>
+                        <p:column headerText="TIPO">
+                            <h:outputText value="Administrador" rendered="#{lista.TIPOPER eq 'A'}"/>
+                            <h:outputText value="Jefe de Sucursal" rendered="#{lista.TIPOPER eq 'J'}"/>
+                            <h:outputText value="Vendedor" rendered="#{lista.TIPOPER eq 'V'}"/>
+                        </p:column>
+                        <p:column headerText="SUCURSAL">
+                            <h:outputText value="#{lista.CODSUC}"/>
+                        </p:column>
+                        <p:column headerText="DIRECCIÓN">
+                            <h:outputText value="#{lista.DIRPER}"/>
+                        </p:column>
+                        <p:column headerText="CEL">
+                            <h:outputText value="#{lista.CELPER}"/>
+                        </p:column>
+                        <p:column headerText="SEXO">
+                            <h:outputText value="Femenino" rendered="#{lista.SEXPER eq 'F'}"/>
+                            <h:outputText value="Masculino" rendered="#{lista.SEXPER eq 'M'}"/>
+                        </p:column>
 
-                <p:column headerText="ACCIONES">
-                    <p:commandButton value="Modificar" oncomplete="PF('WDialogoE').show();" update=":Dialogo">
-                        <f:setPropertyActionListener value="#{lista}" target="#{personaC.persona}"/>
-                    </p:commandButton>
-                    <p:commandButton value="Eliminar" actionListener="#{personaC.eliminar(lista)}"/>
-                </p:column>
-            </p:dataTable>
-        </h:form>
+                        <p:column headerText="ACCIONES">
+                            <p:commandButton value="Modificar" oncomplete="PF('WDialogoE').show();" update=":Dialogo">
+                                <f:setPropertyActionListener value="#{lista}" target="#{personaC.persona}"/>
+                            </p:commandButton>
+                            <p:commandButton value="Eliminar" actionListener="#{personaC.eliminar(lista)}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
 
-        <h:form id="Dialogo">
-            <p:dialog id="DialogoE" widgetVar="WDialogoE" modal="true" >
-                <p:panelGrid id="Datos" columns="4">
-                    <p:outputLabel value="NOMBRES :"/><p:inputText value="#{personaC.persona.NOMPER}"/>
-                    <p:outputLabel value="APELLIDOS :"/><p:inputText value="#{personaC.persona.APEPER}"/>
-                    <p:outputLabel value="DNI :"/><p:inputText value="#{personaC.persona.DNIPER}"/>
-                    <p:outputLabel value="TIPO :"/>
-                    <p:selectOneMenu value="#{personaC.persona.TIPOPER}">
-                        <f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}" noSelectionOption="true"/>
-                        <f:selectItem itemLabel="Administrador" itemValue="A"/>
-                        <f:selectItem itemLabel="Jefe de Sucursal" itemValue="J"/>
-                        <f:selectItem itemLabel="Vendedor" itemValue="V"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel value="SUCURSAL :"/><p:inputText value="#{personaC.persona.CODSUC}"/>
-                    <p:outputLabel value="DIRECCIÓN :"/><p:inputText value="#{personaC.persona.DIRPER}"/>
-                    <p:outputLabel value="CEL :"/><p:inputText value="#{personaC.persona.CELPER}"/>
-                    <p:outputLabel value="SEXO :"/>
-                    <p:selectOneRadio value="#{personaC.persona.SEXPER}">
-                        <f:selectItem itemLabel="Masculino" itemValue="M"/>
-                        <f:selectItem itemLabel="Femenino" itemValue="F"/>
-                    </p:selectOneRadio>                    
-                </p:panelGrid>
-                <p:commandButton value="Modificar" actionListener="#{personaC.modificar()}" update=":dos,Dialogo,:uno">
-                    <p:confirm header="Confirmacion" message="¿Confirmar?"/>
-                </p:commandButton>
-                <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('WDialogoE').hide();"/>
-            </p:dialog>
-        </h:form>        
+                <h:form id="Dialogo">
+                    <p:dialog id="DialogoE" widgetVar="WDialogoE" modal="true" >
+                        <p:panelGrid id="Datos" columns="4">
+                            <p:outputLabel value="NOMBRES :"/><p:inputText value="#{personaC.persona.NOMPER}"/>
+                            <p:outputLabel value="APELLIDOS :"/><p:inputText value="#{personaC.persona.APEPER}"/>
+                            <p:outputLabel value="DNI :"/><p:inputText value="#{personaC.persona.DNIPER}"/>
+                            <p:outputLabel value="TIPO :"/>
+                            <p:selectOneMenu value="#{personaC.persona.TIPOPER}">
+                                <f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="Administrador" itemValue="A"/>
+                                <f:selectItem itemLabel="Jefe de Sucursal" itemValue="J"/>
+                                <f:selectItem itemLabel="Vendedor" itemValue="V"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="SUCURSAL :"/><p:inputText value="#{personaC.persona.CODSUC}"/>
+                            <p:outputLabel value="DIRECCIÓN :"/><p:inputText value="#{personaC.persona.DIRPER}"/>
+                            <p:outputLabel value="CEL :"/><p:inputText value="#{personaC.persona.CELPER}"/>
+                            <p:outputLabel value="SEXO :"/>
+                            <p:selectOneRadio value="#{personaC.persona.SEXPER}">
+                                <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                            </p:selectOneRadio>                    
+                        </p:panelGrid>
+                        <p:commandButton value="Modificar" actionListener="#{personaC.modificar()}" update=":dos,Dialogo,:uno">
+                            <p:confirm header="Confirmacion" message="¿Confirmar?"/>
+                        </p:commandButton>
+                        <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('WDialogoE').hide();"/>
+                    </p:dialog>
+                </h:form>        
 
-        <h:form>
-            <p:confirmDialog global="true">
-                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes"/>
-                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"/>
-            </p:confirmDialog>
-        </h:form>
+                <h:form>
+                    <p:confirmDialog global="true">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes"/>
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"/>
+                    </p:confirmDialog>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
     </h:body>
 </html>
 

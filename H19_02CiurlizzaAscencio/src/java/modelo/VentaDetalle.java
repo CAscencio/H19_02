@@ -1,24 +1,24 @@
 package modelo;
 
-/**
- *
- * @author Usuario
- */
+
 public class VentaDetalle {
 
     private int CODVENTD;
     private int CODVENT;
     private String CODEQUI;
     private int CANTVENTD;
+    private Double PRECIO;
+    
+    private String NOMBREP;
 
     public VentaDetalle() {
     }
 
-    public VentaDetalle(int CODVENTD, int CODVENT, String CODEQUI, int CANTVENTD) {
-        this.CODVENTD = CODVENTD;
-        this.CODVENT = CODVENT;
+    public VentaDetalle(String CODEQUI,String NOMBREP, int CANTVENTD, Double PRECIO) {
+       this.NOMBREP = NOMBREP;
         this.CODEQUI = CODEQUI;
         this.CANTVENTD = CANTVENTD;
+        this.PRECIO = PRECIO;
     }
 
    
@@ -55,5 +55,22 @@ public class VentaDetalle {
         this.CANTVENTD = CANTVENTD;
     }
 
+    public Double getPRECIO() {
+        return PRECIO;
+    }
+
+    public void setPRECIO(Double PRECIO) {
+        this.PRECIO = PRECIO;
+    }
+
+    public String getNOMBREP() {
+        return NOMBREP;
+    }
+
+    public void setNOMBREP(String NOMBREP) {
+        this.NOMBREP = NOMBREP;
+    }
+
+    
     
 }

@@ -9,6 +9,8 @@ import modelo.Equipo;
 
 public class EquipoImpl extends Conexion implements IEquipo {
 
+    private Equipo equipo;
+
     @Override
     public void registrar(Equipo equipo) throws Exception {
         String sql = "INSERT INTO EQUIPO.EQUIPO (NOMEQUI,CATEQUI,PRECEQUI,CANTEQUI,ESTEQUI) VALUES (?,?,?,?,?)";
@@ -94,6 +96,34 @@ public class EquipoImpl extends Conexion implements IEquipo {
             this.cerrar();
         }
         return listado;
+    }
+
+    public Equipo buscarEquipo(int codEquipo) {
+        equipo = new Equipo();
+        String sql = "SELECT CODEQUI,NOMEQUI,PRECEQUI,CANTEQUI FROM EQUIPO.EQUIPO WHERE CODEQUI="+codEquipo;
+        try {
+            Statement st = this.conectar().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                equipo.setCODEQUI(rs.getInt("CODEQUI"));
+                equipo.setNOMEQUI(rs.getString("NOMEQUI"));
+                equipo.setPRECEQUI(rs.getString("PRECEQUI"));
+                equipo.setCANTEQUI(rs.getString("CANTEQUI"));
+            }
+            return equipo;
+        } catch (Exception e) {
+            System.out.println("Error al Buscar Cliente");
+            return null;
+        }
+
+    }
+
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
     }
 
 }

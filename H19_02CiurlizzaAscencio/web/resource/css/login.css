@@ -1,0 +1,14 @@
+.body{
+    background-color: #ECF3FD;
+    font-size: 14px;
+    font-family: Verdana,"Verdana CE", Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: #000000;
+    margin: 10px;
+}
+
+.login{
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15%;
+}

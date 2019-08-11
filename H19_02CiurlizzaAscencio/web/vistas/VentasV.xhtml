@@ -1,12 +1,140 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Punto de Venta</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <ui:composition template="./../Plantilla/Plantilla.xhtml">
+
+            <ui:define name="content">
+                <p:growl autoUpdate="true" showDetail="true"/>
+                <h:form id="Demo">
+                    <p:fieldset legend="DATOS DEL CLIENTE" style="margin-bottom:20px;margin-top: 10px">
+                        <h:panelGrid columns="5">
+                            <p:outputLabel value="DNI DEL CLIENTE :"/>
+                            <p:inputText  id="obsE" 
+                                          value="#{controles.dni}" 
+                                          placeholder="DNI"/>
+                            <p:commandButton value="Buscar" 
+                                             actionListener="#{controles.buscarCliente()}" 
+                                             update="datos"/>
+                            <p:inputText id="datos" style="text-align: center;"
+                                         value="#{controles.datos}" 
+                                         readonly="true"/>
+                            <p:inputText style="text-align: center;"
+                                         value="#{controles.codVDet}" />
+                        </h:panelGrid>
+                    </p:fieldset>
+                    <p:fieldset legend="DATOS DEL PRODUCTO" style="margin-bottom:20px;margin-top: 10px;">
+                        <h:panelGrid id="Producto" columns="6" >  
+                            <p:outputLabel value="BUSCAR PRODUCTO :"/>
+                            <p:selectOneMenu id="autor" value="#{controles.codigoBusca}"  style="width:240px"  effect="fold" editable="false" filter="true" filterMatchMode="startsWith">
+                                <f:selectItem itemLabel="---------- Seleccione ----------" itemValue="#{null}" />
+                                <f:selectItems value="#{equipoC.lequipo}" var="txtEquipo" itemLabel="#{txtEquipo.NOMEQUI}" itemValue="#{txtEquipo.CODEQUI}" />
+                                <p:ajax listener="#{controles.buscarEquipo()}" process="Demo:autor" update="precio,cantidad"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="PRECIO :"/>
+                            <p:inputText  id="precio" style="text-align: center;"
+                                          value="S/.#{controles.equipo.PRECEQUI}" readonly="true"
+                                          />
+                            <p:outputLabel value="STOCK :"/>
+                            <p:inputText  id="cantidad" style="text-align: center;"
+                                          value="#{controles.equipo.CANTEQUI}" readonly="true"
+                                          />
+                            <p:outputLabel value="CANTIDAD :" style="font-weight:bold;color: black"/>
+                            <p:spinner value="#{controles.cantidad}" min="1" max="100">
+                                <p:keyFilter regEx="/[0-9]/"/>
+                            </p:spinner>
+                            <p:commandButton value="Agregar Producto" 
+                                             actionListener="#{controles.agregar()}" update=":venta"/> 
+                        </h:panelGrid>
+                    </p:fieldset>
+
+                </h:form>
+
+                <h:form id="venta">
+                    <p:dataTable value="#{controles.listaventadetalle}" var="lista" editable="true" id="dtTable" reflow="true" widgetVar="filtro" rowIndexVar="index" sortBy="#{lista.CODVENT}"
+                                 paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}" 
+                                 paginator="true" rows="10" style="margin-bottom:20px"> 
+                        <f:facet name="header">
+                            DETALLE DE VENTA
+                        </f:facet>
+
+                        <p:column headerText="N°" width="30">
+                            <center>
+                                <h:outputText value="#{index + 1}" style="color: #000;font-weight:bold;"/>
+                            </center>
+                        </p:column>
+                        <p:column headerText="CÓDIGO" width="140">                                
+                            <h:outputText value="#{lista.CODEQUI}" style="text-transform: capitalize;"/>                                
+                        </p:column>
+                        <p:column headerText="PRODUCTO" width="140">                                
+                            <h:outputText value="#{lista.NOMBREP}" style="text-transform: capitalize;"/>                                
+                        </p:column>
+                        <p:column headerText="CANT." width="40">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <center>
+                                        <h:outputText value="#{lista.CANTVENTD}"/>
+                                    </center>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText id="modelCant" value="#{lista.CANTVENTD}" style="width: 45px">
+                                        <p:ajax update="dtTable"/>
+                                    </p:inputText>                  
+                                </f:facet>                                    
+                            </p:cellEditor>                                                            
+                        </p:column>
+                        <p:column headerText="PRECIO" width="55">
+                            <center>
+                                <h:outputText value="#{lista.PRECIO}"/>
+                            </center>
+                        </p:column>
+                        <p:column headerText="SUB.TOTAL" width="65" style="text-align: right" >  
+                            <h:outputText value="#{lista.PRECIO * lista.CANTVENTD}"/>
+                        </p:column>
+                        <p:column style="width:45px" headerText="EDITAR">
+                            <p:rowEditor/>
+                        </p:column>
+                        <p:column width="35" headerText="ELIMINAR">
+                            <center>
+                                <p:commandButton icon="ui-icon-circle-close"
+                                                 value="Eliminar"
+                                                 actionListener="#{controles.delete(index)}"
+                                                 style="background-color: #ff0033;color: white"
+                                                 update="venta"/>
+                            </center>
+                        </p:column>
+                        <p:columnGroup type="footer">
+                            <p:row>
+                                <p:column colspan="5" style="text-align:right;font-weight:bold;" footerText="TOTAL:" />
+                                <p:column footerText="S/.#{controles.total()}" style="text-align:right;font-weight:bold;"/>
+                                <p:column footerText=""/>
+                                <p:column footerText=""/>
+                            </p:row>
+                        </p:columnGroup>
+                    </p:dataTable>
+                    <p:panelGrid>
+                        <p:commandButton value="Guardar" actionListener="#{controles.registrarVenta()}" id="elim" update="venta" 
+                                         style="background-color: #ff0033 !important" >
+                            <p:confirm header="Confirmación" message="¿Desea realizar la Orden?" icon="ui-icon-alert"/>
+                        </p:commandButton>
+                        <!--Mensaje de confirmacion-->
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                        </p:confirmDialog>
+                    </p:panelGrid>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
     </h:body>
 </html>
+
 
