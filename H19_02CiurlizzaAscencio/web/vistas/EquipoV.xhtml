@@ -13,23 +13,30 @@
         <ui:composition template="./../Plantilla/Plantilla.xhtml">
 
             <ui:define name="content">
+                <center>
+                    <h2>REGISTRO DE EQUIPOS</h2>
+                </center>
                 <p:growl autoUpdate="true" showDetail="true" id="mensaje"/>
-                <h:form id="uno">
+                <h:form id="uno" style="font-size: 0.85em;">
                     <center>
-                        <p:panelGrid id="formulario" columns="2">
+                        <p:panelGrid id="formulario" columns="4" styleClass="ui-panelgrid-blank">
                             <p:outputLabel value="NOMBRE :"/><p:inputText value="#{equipoC.equipo.NOMEQUI}"/>
                             <p:outputLabel value="CATEGORIA :"/><p:inputText value="#{equipoC.equipo.CATEQUI}"/>
                             <p:outputLabel value="PRECIO :"/><p:inputText value="#{equipoC.equipo.PRECEQUI}"/>
                             <p:outputLabel value="CANTIDAD :"/><p:inputText value="#{equipoC.equipo.CANTEQUI}"/>
                         </p:panelGrid>
-                        <p:commandButton value="Registrar" actionListener="#{equipoC.registrar()}" update=":dos,uno"/>
+                        <p:spacer/>                        <p:commandButton value="Registrar" actionListener="#{equipoC.registrar()}" update=":dos,uno"/>
                         <p:commandButton value="Limpiar" actionListener="#{equipoC.limpiar()}"/>
                     </center>            
                 </h:form>
-
-                <h:form id="dos">
-                    <p:dataTable id="listado" var="lista" value="#{equipoC.lequipo}" paginator="true" rows="10" onRowClick="true">
-                        <p:column headerText="N°">
+                <p:spacer/>
+                <h:form id="dos" style="font-size: 0.85em;text-align: center;">
+                    <p:dataTable id="listado" 
+                                 var="lista" 
+                                 value="#{equipoC.lequipo}" 
+                                 paginator="true" 
+                                 rows="10" onRowClick="true">
+                        <p:column headerText="N°" style="width: 5%">
                             <h:outputText value="#{lista.CODEQUI}"/>
                         </p:column>
                         <p:column headerText="NONMBRE">
@@ -45,33 +52,39 @@
                             <h:outputText value="#{lista.CANTEQUI}"/>
                         </p:column>
                         <p:column headerText="ACCIONES">
-                            <p:commandButton value="Editar" oncomplete="PF('WDialogo').show();" update="tres">
-                                <f:setPropertyActionListener value="#{lista}" target="#{equipoC.equipo}"/>
-                            </p:commandButton>
-                            <p:commandButton value="Eliminar" actionListener="#{equipoC.eliminar(lista)}" update="dos"/>
+                            <center>
+                                <p:commandButton value="Editar" oncomplete="PF('WDialogo').show();" update="tres">
+                                    <f:setPropertyActionListener value="#{lista}" target="#{equipoC.equipo}"/>
+                                </p:commandButton>
+                                <p:commandButton value="Eliminar" actionListener="#{equipoC.eliminar(lista)}" update="dos"/>
+                            </center>
                         </p:column>
                     </p:dataTable>
                 </h:form>
 
-                <h:form id="tres">
+                <h:form id="tres" style="font-size: 0.85em;">
                     <p:dialog id="Dialogo" widgetVar="WDialogo" modal="true" header="MODIFICAR">
-                        <p:panelGrid id="formulario" columns="2">
+                        <p:panelGrid id="formulario" columns="2" styleClass="ui-panelgrid-blank">
                             <p:outputLabel value="NOMBRE :"/><p:inputText value="#{equipoC.equipo.NOMEQUI}"/>
                             <p:outputLabel value="CATEGORIA :"/><p:inputText value="#{equipoC.equipo.CATEQUI}"/>
                             <p:outputLabel value="PRECIO :"/><p:inputText value="#{equipoC.equipo.PRECEQUI}"/>
                             <p:outputLabel value="CANTIDAD :"/><p:inputText value="#{equipoC.equipo.CANTEQUI}"/>
                         </p:panelGrid>
-                        <p:commandButton value="Modificar" actionListener="#{equipoC.modificar()}" update=":dos,tres">
-                            <p:confirm header="Confirmar" message="¿Esa Seguro?"/> 
-                        </p:commandButton>
-                        <p:commandButton value="Cancelar" oncomplete="PF('WDialogo').hide();"/>
+                        <center>
+                            <p:commandButton value="Modificar" actionListener="#{equipoC.modificar()}" update=":dos,tres">
+                                <p:confirm header="Confirmar" message="¿Esa Seguro?"/> 
+                            </p:commandButton>
+                            <p:commandButton value="Cancelar" oncomplete="PF('WDialogo').hide();"/>
+                        </center>
                     </p:dialog>
                 </h:form>
 
-                <h:form>
-                    <p:confirmDialog global="true">
-                        <p:commandButton value="Si" styleClass="ui-confirmdialog-yes"/>
-                        <p:commandButton value="No" styleClass="ui-confirmdialog-no"/>
+                <h:form >
+                    <p:confirmDialog global="true" >
+                        <center>
+                            <p:commandButton value="Si" styleClass="ui-confirmdialog-yes" style="font-size: 0.85em;"/>
+                            <p:commandButton value="No" styleClass="ui-confirmdialog-no" style="font-size: 0.85em;"/>
+                        </center>
                     </p:confirmDialog>
                 </h:form>
             </ui:define>

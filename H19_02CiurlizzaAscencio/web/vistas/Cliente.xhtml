@@ -19,10 +19,10 @@
                 <p:growl autoUpdate="true" showDetail="true" id="mensaje"/>
                 <h:form id="uno">
                     <center>
-                        <p:panelGrid id="Datos" columns="4">
+                        <p:panelGrid id="Datos" columns="4" styleClass="ui-panelgrid-blank" style="font-size: 0.85em;">
                             <p:outputLabel value="NOMBRES :"/><p:inputText value="#{clienteC.cliente.NOMCLI}"/>
                             <p:outputLabel value="APELLIDOS :"/><p:inputText value="#{clienteC.cliente.APECLI}"/>
-                            <p:outputLabel value="DNI :"/><p:inputText value="#{clienteC.cliente.DNICLI}" maxlength="8"/>
+                            <p:outputLabel value="DNI :" /><p:inputText value="#{clienteC.cliente.DNICLI}" maxlength="8"/>
                             <p:outputLabel value="DIRECCIÓN :"/><p:inputText value="#{clienteC.cliente.DIRCLI}"/>
                             <p:outputLabel value="SEXO :"/>
                             <p:selectOneRadio value="#{clienteC.cliente.SEXCLI}">
@@ -30,38 +30,47 @@
                                 <f:selectItem itemLabel="Femenino" itemValue="F"/>
                             </p:selectOneRadio>
                         </p:panelGrid>
-                        <p:commandButton value="Registrar" actionListener="#{clienteC.registrar()}" update=":dos,mensaje,Datos"/>
-                        <p:commandButton value="limpiar" actionListener="#{clienteC.limpiar()}" update="uno"/>
+                        <p:spacer/>
+                        <p:commandButton value="Registrar" actionListener="#{clienteC.registrar()}" update=":dos,mensaje,Datos" style="font-size: 0.85em;"/>
+                        <p:commandButton value="limpiar" actionListener="#{clienteC.limpiar()}" update="uno" style="font-size: 0.85em;"/>
                     </center>
-                </h:form>
-
+                </h:form>                
+                <p:spacer/>
                 <h:form id="dos">
-                    <p:dataTable id="DatosL" paginator="true" value="#{clienteC.lcliente}" var="lista">
-                        <p:column headerText="N°" style="width:3px">
-                            <h:outputText value="#{lista.CODCLI}"/>
+                    <p:dataTable id="DatosL" 
+                                 paginator="true" 
+                                 value="#{clienteC.lcliente}" 
+                                 var="lista"
+                                 rows="10"
+                                 style="margin-bottom:20px">
+
+                        <p:column headerText="N°" style="width:4%;font-size: 0.85em;">
+                            <h:outputText value="#{lista.CODCLI}" style="text-align: center"/>
                         </p:column>
-                        <p:column headerText="NOMBRE">
+                        <p:column headerText="NOMBRE" style="font-size: 0.85em;">
                             <h:outputText value="#{lista.NOMCLI}"/>
                         </p:column>
-                        <p:column headerText="APELLIDO">
+                        <p:column headerText="APELLIDO" style="font-size: 0.85em;">
                             <h:outputText value="#{lista.APECLI}"/>
                         </p:column>
-                        <p:column headerText="DNI">
+                        <p:column headerText="DNI" style="width:9%;font-size: 0.85em;">
                             <h:outputText value="#{lista.DNICLI}"/>
                         </p:column>
-                        <p:column headerText="DIRECCIÓN">
+                        <p:column headerText="DIRECCIÓN" style="width:15%;font-size: 0.85em;">
                             <h:outputText value="#{lista.DIRCLI}"/>
                         </p:column>
-                        <p:column headerText="SEXO">
+                        <p:column headerText="SEXO" style="width:8%;font-size: 0.85em;">
                             <h:outputText value="Femenino" rendered="#{lista.SEXCLI eq 'F'}"/>
                             <h:outputText value="Masculino" rendered="#{lista.SEXCLI eq 'M'}"/>
                         </p:column>
 
-                        <p:column headerText="ACCIONES">
-                            <p:commandButton value="Modificar" oncomplete="PF('WDialogoE').show();" update=":Dialogo">
-                                <f:setPropertyActionListener value="#{lista}" target="#{clienteC.cliente}"/>
-                            </p:commandButton>
-                            <p:commandButton value="Eliminar" actionListener="#{clienteC.eliminar(lista)}"/>
+                        <p:column headerText="ACCIONES" style="font-size: 0.85em;">
+                            <center>
+                                <p:commandButton value="Modificar" oncomplete="PF('WDialogoE').show();" update=":Dialogo">
+                                    <f:setPropertyActionListener value="#{lista}" target="#{clienteC.cliente}"/>
+                                </p:commandButton>
+                                <p:commandButton value="Eliminar" actionListener="#{clienteC.eliminar(lista)}"/>
+                            </center>
                         </p:column>
                     </p:dataTable>
                 </h:form>

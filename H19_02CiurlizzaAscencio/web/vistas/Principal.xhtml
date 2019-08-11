@@ -12,21 +12,21 @@
         <ui:composition template="./../Plantilla/Plantilla.xhtml">
 
             <ui:define name="content">
-                <style type="text/css">
+<!--                <style type="text/css">
                     .ui-panel, div.ui-state-hover {
                         margin: 10px;
-                        width:200px;
+                        width: 216px;
                     }
 
                     .ui-dashboard-column {
-                        width:20px;
+                        width: 216px;
                     }
-                </style>
+                </style>-->
 
                 <div style="height:120px">
                     <h:form>
-                        <p:panelGrid columns="5" style="align-content: center;">
-                            <p:panel id="sports" header="Productos">
+                        <p:panelGrid columns="5" style="align-content: center;" styleClass="ui-panelgrid-blank">
+                            <p:panel id="sports" header="Productos" style="text-align: center;margin: 10px;width: 216px;">
                                 <center>
                                     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
                                         <img src="../resource/img/producto.png"/>
@@ -34,7 +34,7 @@
                                     </p:panelGrid>
                                 </center>
                             </p:panel>
-                            <p:panel id="finance" header="Clientes" >
+                            <p:panel id="finance" header="Clientes" style="text-align: center;margin: 10px;width: 216px;">
                                 <center>
                                     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
                                         <img src="../resource/img/objetivo.png"/>
@@ -42,7 +42,7 @@
                                     </p:panelGrid>
                                 </center>
                             </p:panel>
-                            <p:panel id="lifestyle" header="Ventas">
+                            <p:panel id="lifestyle" header="Ventas" style="text-align: center;margin: 10px;width: 216px;">
                                 <center>
                                     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
                                         <img src="../resource/img/pago-por-clic.png"/>
@@ -50,7 +50,7 @@
                                     </p:panelGrid>
                                 </center>                            
                             </p:panel>
-                            <p:panel id="weather" header="Trabajadores">
+                            <p:panel id="weather" header="Trabajadores" style="text-align: center;margin: 10px;width: 216px;">
                                 <center>
                                     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
                                         <img src="../resource/img/obrero.png"/>
@@ -58,7 +58,7 @@
                                     </p:panelGrid>
                                 </center>                            
                             </p:panel>
-                            <p:panel id="politics" header="Sucursales">
+                            <p:panel id="politics" header="Sucursales" style="text-align: center;margin: 10px;width: 216px;">
                                 <center>
                                     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
                                         <img src="../resource/img/sucursales.png"/>
@@ -69,12 +69,17 @@
                         </p:panelGrid>
                     </h:form>
                 </div>
-                <h:form id="char">
-                    <p:chart type="line" model="#{listBean.lineModel1}" style="height:300px;"/>
-                </h:form>
-                <h:form id="char2">
-                    <p:chart type="line" model="#{listBean.lineModel2}" style="height:300px;"/>
-                </h:form>
+                <br/>
+                <p:panelGrid columns="2" style="text-align: center;margin: 10px;width: 100%;height: 400px;" styleClass="ui-panelgrid-blank">                    
+                    <h:form id="char">
+                        <p:chart type="line" model="#{listBean.lineModel1}" />
+                    </h:form>
+                    <h:form id="char2">
+                        <p:chart type="line" model="#{listBean.lineModel2}"/>
+                    </h:form>    
+                </p:panelGrid>
+                <p:spacer/>
+
             </ui:define>
 
         </ui:composition>

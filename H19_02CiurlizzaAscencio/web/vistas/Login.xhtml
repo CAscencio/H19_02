@@ -8,7 +8,7 @@
         <title>Login</title>
         <link href="resource/css/login.css" rel="stylesheet" type="text/css"/>
     </h:head>
-    
+
     <h:body>   
         <div class="login">
             <h:form>  
@@ -24,14 +24,14 @@
 
                         <f:facet name="footer">
                             <p:commandButton value="Login" update="mensaje" actionListener="#{loginController.startSession()}"
-                                              oncomplete="handleLoginRequest(xhr, status, args)"/>
+                                             oncomplete="handleLoginRequest(xhr, status, args)"/>
                             <p:commandButton value="Cancelar"/> 
                         </f:facet>  
                     </h:panelGrid>
                 </p:panel>    
             </h:form>
         </div>
-        
+
         <script type="text/javascript">
             function handleLoginRequest(xhr, status, args) {
                 if (args.validationFailed || !args.loggedIn) {
