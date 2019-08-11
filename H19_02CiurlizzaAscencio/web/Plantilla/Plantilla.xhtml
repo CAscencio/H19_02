@@ -20,15 +20,19 @@
             <h:form>
                 <p:menubar>
                     <p:menuitem value="Principal" outcome="/faces/vistas/Principal.xhtml" icon="ui-icon-home"/>
-                    <p:menuitem value="Personal" outcome="/faces/vistas/PersonaV.xhtml" icon="ui-icon-person"/>
-                    <p:menuitem value="Cliente" outcome="/faces/vistas/PersonaV.xhtml" icon="ui-icon-person"/>
+                    <p:submenu label="Persona" icon="ui-icon-person">
+                        <p:menuitem value="Vendedor" url="/faces/vistas/PersonaV.xhtml" icon="ui-icon-person" />
+                        <p:menuitem value="Cliente" url="/faces/vistas/Cliente.xhtml" icon="ui-icon-person" />
+                    </p:submenu>
                     <p:menuitem value="Sucursal" outcome="/faces/vistas/SucursalV.xhtml" icon="ui-icon-check"/>
                     <p:menuitem value="Producto" outcome="/faces/vistas/EquipoV.xhtml" icon="ui-icon-suitcase"/>
                     <p:menuitem value="Venta" outcome="/faces/vistas/VentasV.xhtml"  icon="ui-icon-check"/>
                     <p:menuitem value="Historial" outcome="/faces/vistas/VentasV.xhtml" icon="ui-icon-check" />
+
                     <f:facet name="options">
-                        <p:inputText style="margin:1px 10px 1px 1px;" placeholder="Ciurlizza Ascencio Luyo"/>
-                        <p:commandButton type="button" value="Logout" icon="ui-icon-power" />
+                        <p:outputLabel value="#{loginController.login.NOMSUC}" style="margin:1px 80px 1px 1px;"/>
+                        <p:inputText style="margin:1px 10px 1px 1px;" value="#{loginController.login.NOMPER} #{loginController.login.APEPER}" readonly="true"/>
+                        <p:commandButton  value="Salir" icon="ui-icon-power" actionListener="#{loginController.finishSession()}"/>
                     </f:facet>
                 </p:menubar>
             </h:form>
@@ -36,7 +40,7 @@
 
         <div id="content" class="center_content">
             <ui:insert name="content">
-                
+
             </ui:insert>
         </div>
 

@@ -17,13 +17,13 @@
                 <p:panel header="Login Sis. Ventas" widgetVar="dlg" style="text-align: center">
                     <h:panelGrid columns="2" cellpadding="5">
                         <h:outputLabel for="usuario" value="USUARIO:" />
-                        <p:inputText id="usuario" placeholder="usuario" value="#{loginC.user}" required="true" label="username"/>
+                        <p:inputText id="usuario" placeholder="usuario" value="#{loginController.user}" required="true" label="username"/>
 
                         <h:outputLabel for="password" value="CONSTRASEÑA:" />
-                        <p:password id="password" placeholder="password" value="#{loginC.pass}" required="true" label="password" />
+                        <p:password id="password" placeholder="password" value="#{loginController.pass}" required="true" label="password" />
 
                         <f:facet name="footer">
-                            <p:commandButton value="Login" update="mensaje" actionListener="#{loginC.ingresar()}"
+                            <p:commandButton value="Login" update="mensaje" actionListener="#{loginController.startSession()}"
                                               oncomplete="handleLoginRequest(xhr, status, args)"/>
                             <p:commandButton value="Cancelar"/> 
                         </f:facet>  

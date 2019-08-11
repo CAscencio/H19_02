@@ -85,6 +85,25 @@ public class InformacionImpl extends  Conexion implements Serializable {
         
     }
     
+    public String ventas(){
+        String cantidad = "";
+        String sql = "SELECT COUNT(CODVENT) AS CANTIDAD FROM VENTA.VENTA WHERE ESTVENT = 'A'";
+        try {
+            Statement st = this.conectar().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+            cantidad = rs.getString("CANTIDAD");
+            }
+            st.close();
+            rs.close();
+            return cantidad;
+        } catch (Exception e) {
+            System.out.println("Error al traer Cant. Ventas "+e);
+        }
+        return "";
+        
+    }
+    
     public String sucursales(){
         String cantidad = "";
         String sql = "SELECT COUNT(CODSUC) AS CANTIDAD FROM PERSONA.SUCURSAL WHERE ESTSUC = 'A'";

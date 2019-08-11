@@ -57,7 +57,7 @@
                             <p:outputLabel value="DIRECCIÓN :"/><p:inputText value="#{sucursalC.sucursal.DIRSUC}"/>                
                         </p:panelGrid>
 
-                        <p:commandButton value="Editar" actionListener="#{sucursalC.modificar()}" update=":dos">
+                        <p:commandButton value="Editar" actionListener="#{sucursalC.modificar()}" update=":dos,tres">
                             <f:setPropertyActionListener value="#{lista}" target="#{sucursalC.sucursal}"/>
                             <p:confirm header="Confirmacion" message="Confirmar ?"/>
                         </p:commandButton>

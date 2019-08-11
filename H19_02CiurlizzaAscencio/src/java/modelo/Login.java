@@ -8,9 +8,13 @@ public class Login {
     private String NOMPER;
     private String APEPER;
     private String TIPPER;
+    private String CODSUC;
+    private String NOMSUC;
     private String USUPER;
     private String PASPER;
 
+    
+    
     public String getCODUSU() {
         return CODUSU;
     }
@@ -51,6 +55,24 @@ public class Login {
         this.TIPPER = TIPPER;
     }
 
+    public String getCODSUC() {
+        return CODSUC;
+    }
+
+    public void setCODSUC(String CODSUC) {
+        this.CODSUC = CODSUC;
+    }
+
+    public String getNOMSUC() {
+        return NOMSUC;
+    }
+
+    public void setNOMSUC(String NOMSUC) {
+        this.NOMSUC = NOMSUC;
+    }
+    
+    
+
     public String getUSUPER() {
         return USUPER;
     }
@@ -66,8 +88,5 @@ public class Login {
     public void setPASPER(String PASPER) {
         this.PASPER = PASPER;
     }
-    
-    
-    
     
 }

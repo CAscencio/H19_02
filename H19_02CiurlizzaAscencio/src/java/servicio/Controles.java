@@ -1,5 +1,6 @@
 package servicio;
 
+import controlador.LoginController;
 import dao.Conexion;
 import dao.EquipoImpl;
 import dao.PersonaImpl;
@@ -56,15 +57,18 @@ public class Controles extends Conexion implements Serializable {
     public void registrarVenta() {
         venta = new Venta();
         daoVenta = new VentaImpl();
+        LoginController codigo = new LoginController();
         try {
-            venta.setCODVEND(String.valueOf(getCodVDet()));
+            venta.setCODVEND(String.valueOf(getMiccodigo()));
             venta.setCODCLI(String.valueOf(persona.getCODPER()));
+            System.out.println("AVER A VER Q SALE XD");
+            imprime();
             System.out.println("P1");
             venta.setMONTVEND((float) total());
             System.out.println("P2");
             daoVenta.registrar(venta);
             System.out.println("P3");
-            registrar();
+            registrarDetalle();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Venta Hecha", ":D"));
         } catch (Exception e) {
         }
@@ -103,7 +107,7 @@ public class Controles extends Conexion implements Serializable {
     }
 
     //Registrar en la Base de Datos
-    public void registrar() throws Exception {
+    public void registrarDetalle() throws Exception {
         String codigo = CodigoV();
         String sql = "INSERT INTO VENTA.VENTA_DETALLE (CODVENT,CODEQUI,CANTVENTD,ESTVENTD) VALUES (?,?,?,?)";
         try {
@@ -168,6 +172,18 @@ public class Controles extends Conexion implements Serializable {
         } catch (Exception e) {
             System.out.println("Error al Buscra el cliente :v " + e);
         }
+    }
+
+    private static int miccodigo;
+
+    public int codigoR(int codigoV) {
+        miccodigo = codigoV;
+        imprime();
+        return codigoV;
+    }
+
+    public void imprime() {
+        System.out.println("FINAL :"+getMiccodigo());
     }
 
     public String getNombreE() {
@@ -305,5 +321,10 @@ public class Controles extends Conexion implements Serializable {
     public void setDaoVenta(VentaImpl daoVenta) {
         this.daoVenta = daoVenta;
     }
+
+    public int getMiccodigo() {
+        return miccodigo;
+    }
+
 
 }
