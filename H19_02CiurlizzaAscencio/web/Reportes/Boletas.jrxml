@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Boletas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="565abdf5-5dfd-416f-8d27-bc534d99d49d">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Ventas"/>
+	<parameter name="CVENTA" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT *
+FROM "vw_CABECERA"
+WHERE  CODVENT= $P{CVENTA} ]]>
+	</queryString>
+	<field name="CODVENT" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="CODVENT"/>
+	</field>
+	<field name="CODVEND" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CODVEND"/>
+	</field>
+	<field name="CODCLI" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CODCLI"/>
+	</field>
+	<field name="FECHVENT" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="FECHVENT"/>
+	</field>
+	<field name="NOMSUC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NOMSUC"/>
+	</field>
+	<field name="MONTVEND" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="MONTVEND"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement x="70" y="0" width="420" height="60" uuid="29514253-9f12-42bb-874f-7f9c6e9e53ee"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMPUTECH]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="190" y="30" width="180" height="30" uuid="7de282b9-f461-4b7e-8ff3-40e806222e4b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMSUC}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="86" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="329" y="2" width="210" height="25" backcolor="#EDEBEB" uuid="d5970d4e-1cd3-4d67-a0c4-5633cb0aa5d7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R.U.C.   00582486892]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="329" y="27" width="210" height="22" forecolor="#050505" backcolor="#77F5F7" uuid="42f8d28a-e931-4c0d-a5d2-f5fe88ef5149"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BOLETA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="329" y="50" width="210" height="25" backcolor="#EDEBEB" uuid="587d5485-1c93-4450-8cf5-2d9e3ca905a6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="380" y="50" width="110" height="25" uuid="06b67a06-07f4-4d82-b1a3-78c8cd4020e6"/>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CODVENT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="320" height="75" backcolor="#EDEBEB" uuid="dbb57b93-61cb-4e70-862c-7a1412ae4780"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="7" width="76" height="22" uuid="6d567d71-9f94-4cd1-8a78-ad02662b7669"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLIENTE :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="29" width="76" height="22" uuid="466d7fcd-f578-4238-b4bc-60007d5e03bb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="51" width="76" height="22" uuid="d5cfda18-f1ea-4e2f-984d-b9e819b5679e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VENDEDOR :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="79" y="7" width="210" height="22" uuid="6abf0636-fe23-41f0-9dd4-0b0ab52aef93"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CODCLI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="29" width="100" height="22" uuid="f2eaf2b7-8b01-490e-bc98-9b8245f6a154"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FECHVENT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="51" width="210" height="22" uuid="dab5b518-d935-437c-9283-3390bccdd893"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CODVEND}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="4" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="273" splitType="Stretch">
+			<subreport>
+				<reportElement x="-20" y="0" width="595" height="270" uuid="6d7f51ba-4585-43bf-b2d6-89eb57b5b245"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["SBoletas.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
