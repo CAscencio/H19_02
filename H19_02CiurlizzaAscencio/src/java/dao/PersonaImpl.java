@@ -83,7 +83,7 @@ public class PersonaImpl extends Conexion implements IPersona {
     public List<Persona> listarpersona() throws Exception {
         List<Persona> listado;
         Persona persona;
-        String sql = "SELECT * FROM PERSONA.PERSONA WHERE ESTPER='A'";
+        String sql = "SELECT * FROM PERSONA.PERSONA WHERE ESTPER='A' AND TIPOPER !='C'";
         try {
             listado = new ArrayList();
             Statement st = this.conectar().createStatement();

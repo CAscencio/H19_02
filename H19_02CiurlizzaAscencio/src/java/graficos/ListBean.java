@@ -53,14 +53,14 @@ public class ListBean implements Serializable {
 
     private void createLineModels() {
         lineModel1 = initLinearModel();
-        lineModel1.setTitle("Prestamos - Devoluciones");
+        lineModel1.setTitle("Ventas Sucursales");
         lineModel1.setLegendPosition("e");
         Axis yAxis = lineModel1.getAxis(AxisType.Y);
         yAxis.setMin(0);
         yAxis.setMax(10);
 
         lineModel2 = initCategoryModel();
-        lineModel2.setTitle("Estrenos de Libros");
+        lineModel2.setTitle("Top Vendedores");
         lineModel2.setLegendPosition("e");
         lineModel2.setShowPointLabels(true);
         lineModel2.getAxes().put(AxisType.X, new CategoryAxis("Años"));
