@@ -13,27 +13,26 @@
 
             <ui:define name="content">
                 <p:growl autoUpdate="true" showDetail="true"/>
-                <h:form id="Demo">
-                    <p:fieldset legend="DATOS DEL CLIENTE" style="margin-bottom:20px;margin-top: 10px">
-                        <h:panelGrid columns="5">
+                <h:form id="Demo" style="font-size: 0.85em;">
+                    <p:fieldset legend="DATOS DEL CLIENTE" style="margin-top: 10px">
+                        <h:panelGrid columns="5" >
                             <p:outputLabel value="DNI DEL CLIENTE :"/>
                             <p:inputText  id="obsE" 
                                           value="#{controles.dni}" 
-                                          placeholder="DNI"/>
+                                          placeholder="DNI" style="width: 56% !important"/>
                             <p:commandButton value="Buscar" 
                                              actionListener="#{controles.buscarCliente()}" 
-                                             update="datos"/>
-                            <p:inputText id="datos" style="text-align: center;"
+                                             update="datos" />
+
+                            <p:inputText id="datos" style="text-align: center;width: 120% !important;"
                                          value="#{controles.datos}" 
                                          readonly="true"/>
-<!--                            <p:inputText style="text-align: center;"
-                                         value="{controles.codVDet}" />-->
                         </h:panelGrid>
                     </p:fieldset>
                     <p:fieldset legend="DATOS DEL PRODUCTO" style="margin-bottom:20px;margin-top: 10px;">
                         <h:panelGrid id="Producto" columns="6" >  
                             <p:outputLabel value="BUSCAR PRODUCTO :"/>
-                            <p:selectOneMenu id="autor" value="#{controles.codigoBusca}"  style="width:240px"  effect="fold" editable="false" filter="true" filterMatchMode="startsWith">
+                            <p:selectOneMenu id="autor" value="#{controles.codigoBusca}"  style="width:150% !important"  effect="fold" editable="false" filter="true" filterMatchMode="startsWith">
                                 <f:selectItem itemLabel="---------- Seleccione ----------" itemValue="#{null}" />
                                 <f:selectItems value="#{equipoC.lequipo}" var="txtEquipo" itemLabel="#{txtEquipo.NOMEQUI}" itemValue="#{txtEquipo.CODEQUI}" />
                                 <p:ajax listener="#{controles.buscarEquipo()}" process="Demo:autor" update="precio,cantidad"/>
@@ -57,7 +56,7 @@
 
                 </h:form>
 
-                <h:form id="venta">
+                <h:form id="venta" style="font-size: 0.85em;">
                     <p:dataTable value="#{controles.listaventadetalle}" var="lista" editable="true" id="dtTable" reflow="true" widgetVar="filtro" rowIndexVar="index" sortBy="#{lista.CODVENT}"
                                  paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}" 
                                  paginator="true" rows="10" style="margin-bottom:20px"> 
@@ -65,18 +64,18 @@
                             DETALLE DE VENTA
                         </f:facet>
 
-                        <p:column headerText="N°" width="30">
+                        <p:column headerText="N°" style="width:3%">
                             <center>
                                 <h:outputText value="#{index + 1}" style="color: #000;font-weight:bold;"/>
                             </center>
                         </p:column>
-                        <p:column headerText="CÓDIGO" width="140">                                
+                        <p:column headerText="CÓDIGO" style="width:3%">                                
                             <h:outputText value="#{lista.CODEQUI}" style="text-transform: capitalize;"/>                                
                         </p:column>
-                        <p:column headerText="PRODUCTO" width="140">                                
+                        <p:column headerText="PRODUCTO" style="width:12%">                                
                             <h:outputText value="#{lista.NOMBREP}" style="text-transform: capitalize;"/>                                
                         </p:column>
-                        <p:column headerText="CANT." width="40">
+                        <p:column headerText="CANT." style="width:5%">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <center>
