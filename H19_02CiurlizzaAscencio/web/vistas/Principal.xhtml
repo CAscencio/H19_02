@@ -12,16 +12,16 @@
         <ui:composition template="./../Plantilla/Plantilla.xhtml">
 
             <ui:define name="content">
-<!--                <style type="text/css">
-                    .ui-panel, div.ui-state-hover {
-                        margin: 10px;
-                        width: 216px;
-                    }
-
-                    .ui-dashboard-column {
-                        width: 216px;
-                    }
-                </style>-->
+                <!--                <style type="text/css">
+                                    .ui-panel, div.ui-state-hover {
+                                        margin: 10px;
+                                        width: 216px;
+                                    }
+                
+                                    .ui-dashboard-column {
+                                        width: 216px;
+                                    }
+                                </style>-->
 
                 <div style="height:120px">
                     <h:form>
@@ -75,7 +75,12 @@
                         <p:chart type="line" model="#{listBean.lineModel1}" />
                     </h:form>
                     <h:form id="char2">
-                        <p:chart type="line" model="#{listBean.lineModel2}"/>
+                        <p:chart type="pie" model="#{CantVSucursalC.pieModel}"
+                                 rendered="#{CantVSucursalC.pieModel != null}"
+                                 style="height: auto;width: auto"
+                                 responsive="true">
+                            <p:autoUpdate id="uno"/>
+                        </p:chart>
                     </h:form>    
                 </p:panelGrid>
                 <p:spacer/>

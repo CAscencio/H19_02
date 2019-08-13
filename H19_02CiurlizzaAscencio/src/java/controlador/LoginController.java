@@ -26,6 +26,11 @@ public class LoginController implements Serializable {
     public LoginController() {
     }
 
+    public void limpiar(){
+        setUser("");
+        setPass("");
+    }
+    
     public void startSession() throws Exception {
         LoginDao dao;
         try {

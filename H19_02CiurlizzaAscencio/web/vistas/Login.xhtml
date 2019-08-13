@@ -14,20 +14,20 @@
             <h:form>  
                 <p:growl id="mensaje" sticky="true" showDetail="true" life="3000" />
 
-                <p:panel header="Login Sis. Ventas" widgetVar="dlg" style="text-align: center">
+                <p:panel header="COMPUTECH S.A" widgetVar="dlg" style="text-align: center">
                     <center>
-                        <h:panelGrid columns="1" cellpadding="5">
+                        <h:panelGrid columns="1" cellpadding="5" id="panelG">
                             <br/>
                             <h:outputLabel for="usuario" value="USUARIO:" />
                             <p:inputText id="usuario"  value="#{loginController.user}" required="true" label="username"/>
                             <br/>
-                            <h:outputLabel for="password" value="CONSTRASEÑA:" />
+                            <h:outputLabel for="password" value="CONTRASEÑA:" />
                             <p:password id="password" value="#{loginController.pass}" required="true" label="password" />
                             <br/>
                             <f:facet name="footer">
                                 <p:commandButton value="Ingresar" update="mensaje" actionListener="#{loginController.startSession()}"
                                                  oncomplete="handleLoginRequest(xhr, status, args)"/>
-                                <p:commandButton value="Cancelar"/> 
+                                <p:commandButton value="Cancelar" update="panelG" actionListener="#{loginController.limpiar()}" process="@this"/> 
                             </f:facet>  
                         </h:panelGrid>
                     </center>

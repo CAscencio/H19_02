@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Mis Ventas</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./../Plantilla/Plantilla.xhtml">
+
+            <ui:define name="content">
+                <center>
+                    <h2>MIS VENTAS</h2>
+                </center>
+                <h:form id="uno" style="font-size: 0.85em;text-align: center">
+                    <p:dataTable var="lista" value="#{cabeceraC.listCabecera}" rows="10">
+                        <p:column headerText="CÓDIGO" style="width: 7%">
+                            <h:outputText value="#{lista.CODIGO}" />
+                        </p:column>
+
+                        <p:column headerText="VENDEDOR">
+                            <h:outputText value="#{lista.VENDEDOR}" />
+                        </p:column>
+
+                        <p:column headerText="CLIENTE">
+                            <h:outputText value="#{lista.CLIENTE}" />
+                        </p:column>
+
+                        <p:column headerText="FECHA">
+                            <h:outputText value="#{lista.FECHA}" />
+                        </p:column>
+                        <p:column headerText="MONTO">
+                            <h:outputText value="S/ #{lista.MONTO}" />
+                        </p:column>
+                        <p:column headerText="DETALLE" style="width: 10%">
+                            <p:commandButton value="Ver" actionListener="#{cabeceraC.MostrarDetalle(lista)}" oncomplete="PF('WDialogoD').show();" update=":Dailogo"/>
+                        </p:column>
+                    </p:dataTable>
+
+                </h:form>
+                <h:form id="Dailogo" style="font-size: 0.85em;">
+                    <p:dialog id="dialogito" header="DETALLE" showEffect="fade" widgetVar="WDialogoD" modal="true" resizable="false">
+                        <p:outputPanel id="documentPanel" >
+                            <p:dataTable var="lista" value="#{cabeceraC.listDetalle}" >
+                                <p:column headerText="N°" style="width: 7%">
+                                    <h:outputText value="#{lista.NUMERO}" />
+                                </p:column>
+
+                                <p:column headerText="EQUIPO">
+                                    <h:outputText value="#{lista.EQUIPO}" />
+                                </p:column>
+
+                                <p:column headerText="CANTIDAD">
+                                    <h:outputText value="#{lista.CANTIDAD}" />
+                                </p:column>
+
+                                <p:column headerText="PRECIO">
+                                    <h:outputText value="S/ #{lista.PRECIO}" />
+                                </p:column>
+                                <p:column headerText="IMPORTE">
+                                    <h:outputText value="S/ #{lista.IMPORTE}" />
+                                </p:column>                        
+                            </p:dataTable>
+                        </p:outputPanel>
+                        <br/>
+                        <center>
+                            <p:commandButton value="Cerrar" oncomplete="PF('WDialogoD').hide();"/>
+                        </center>
+                    </p:dialog>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+

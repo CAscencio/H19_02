@@ -68,7 +68,7 @@ public class InformacionImpl extends  Conexion implements Serializable {
     
     public String trabajadores(){
         String cantidad = "";
-        String sql = "SELECT COUNT(CODPER) AS CANTIDAD FROM PERSONA.PERSONA WHERE TIPOPER = 'V' AND ESTPER = 'A'";
+        String sql = "SELECT COUNT(CODPER) AS CANTIDAD FROM PERSONA.PERSONA WHERE TIPOPER = 'V' OR TIPOPER = 'A' AND ESTPER = 'A'";
         try {
             Statement st = this.conectar().createStatement();
             ResultSet rs = st.executeQuery(sql);
