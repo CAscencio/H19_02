@@ -53,12 +53,16 @@ public class Controles extends Conexion implements Serializable {
     private String CVENTA;
     private String CVENTD;
 
+//Reporte
+    private reporteP reportes;
+
     public Controles() {
         listaventadetalle = new ArrayList();
         ventadetalle = new VentaDetalle();
         daoPersona = new PersonaImpl();
         persona = new Persona();
         daoEquipo = new EquipoImpl();
+        reportes  = new reporteP();
     }
 
     public void registrarVenta() {
@@ -76,6 +80,7 @@ public class Controles extends Conexion implements Serializable {
             daoVenta.registrar(venta);
             System.out.println("P3");
             registrarDetalle();
+
 //            reporteBoleta();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Venta Hecha", ":D"));
         } catch (Exception e) {
@@ -83,16 +88,13 @@ public class Controles extends Conexion implements Serializable {
     }
 
     public void reporteBoleta() throws Exception {
-        reporteP reportes = new reporteP();
-         setCVENTA( CodigoV());
-         setCVENTD(getCVENTA());
-         System.out.println("1 .- "+getCVENTA());
-         System.out.println("2.- "+getCVENTD());
+        setCVENTA(CodigoV());
+        System.out.println("1 .- " + getCVENTA());
         try {
             Map<String, Object> parameters = new HashMap();
-            parameters.put("CVENTA", getCVENTA());
-//            parameters.put("CVENTD", getCVENTD());
-            reportes.exportarBolPDF(parameters);
+            parameters.put("CODVENT", getCVENTA());
+            System.out.println("ESTO ES EL PARAMETRO "+parameters.toString()+" <--");
+            reportes.exportarBoletaPDF(parameters);
         } catch (Exception e) {
             throw e;
         }

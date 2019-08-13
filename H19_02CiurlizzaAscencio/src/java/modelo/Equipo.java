@@ -4,7 +4,7 @@ public class Equipo {
 
     private int CODEQUI;
     private String NOMEQUI;
-    private String CATEQUI;
+    private String CODCAT;
     private String PRECEQUI;
     private String CANTEQUI;
     private String ESTEQUI;
@@ -25,12 +25,12 @@ public class Equipo {
         this.NOMEQUI = NOMEQUI;
     }
 
-    public String getCATEQUI() {
-        return CATEQUI;
+    public String getCODCAT() {
+        return CODCAT;
     }
 
-    public void setCATEQUI(String CATEQUI) {
-        this.CATEQUI = CATEQUI;
+    public void setCODCAT(String CODCAT) {
+        this.CODCAT = CODCAT;
     }
 
     public String getPRECEQUI() {

@@ -119,16 +119,23 @@
                         </p:columnGroup>
                     </p:dataTable>
                     <p:panelGrid>
-                        <p:commandButton value="Guardar" actionListener="#{controles.registrarVenta()}" id="elim" update="venta" 
+                        <p:commandButton value="Guardar Venta" actionListener="#{controles.registrarVenta()}" id="elim" update="venta" 
                                          style="background-color: #ff0033 !important" >
-                            <p:confirm header="Confirmación" message="¿Desea realizar la Orden?" icon="ui-icon-alert"/>
+                            <p:confirm header="Confirmación" message="¿Desea realizar la Venta?" icon="ui-icon-alert"/>
                         </p:commandButton>
+                        <h:commandLink actionListener="#{controles.reporteBoleta()}">
+                            <p:graphicImage url="../../resource/img/descargar.png" width="32" title="Boleta de Venta"/>
+                            <p:dataExporter type="pdf" target="dtTable" fileName="Reporte_Boleta"/>
+                        </h:commandLink>  
                         <!--Mensaje de confirmacion-->
-                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
-                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
-                        </p:confirmDialog>
+
                     </p:panelGrid>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <center>
+                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" style="font-size: 0.85em;"/>
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" style="font-size: 0.85em;"/>
+                        </center>
+                    </p:confirmDialog>
                 </h:form>
             </ui:define>
 

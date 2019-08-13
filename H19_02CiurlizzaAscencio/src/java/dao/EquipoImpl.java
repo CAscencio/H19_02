@@ -13,11 +13,11 @@ public class EquipoImpl extends Conexion implements IEquipo {
 
     @Override
     public void registrar(Equipo equipo) throws Exception {
-        String sql = "INSERT INTO EQUIPO.EQUIPO (NOMEQUI,CATEQUI,PRECEQUI,CANTEQUI,ESTEQUI) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO EQUIPO.EQUIPO (NOMEQUI,CODCAT,PRECEQUI,CANTEQUI,ESTEQUI) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps = this.conectar().prepareStatement(sql);
             ps.setString(1, equipo.getNOMEQUI());
-            ps.setString(2, equipo.getCATEQUI());
+            ps.setString(2, equipo.getCODCAT());
             ps.setString(3, equipo.getPRECEQUI());
             ps.setString(4, equipo.getCANTEQUI());
             ps.setString(5, "A");
@@ -33,11 +33,11 @@ public class EquipoImpl extends Conexion implements IEquipo {
 
     @Override
     public void modificar(Equipo equipo) throws Exception {
-        String sql = "UPDATE EQUIPO.EQUIPO SET NOMEQUI=?,CATEQUI=?,PRECEQUI=?,CANTEQUI=?,ESTEQUI=? WHERE CODEQUI=?";
+        String sql = "UPDATE EQUIPO.EQUIPO SET NOMEQUI=?,CODCAT=?,PRECEQUI=?,CANTEQUI=?,ESTEQUI=? WHERE CODEQUI=?";
         try {
             PreparedStatement ps = this.conectar().prepareStatement(sql);
             ps.setString(1, equipo.getNOMEQUI());
-            ps.setString(2, equipo.getCATEQUI());
+            ps.setString(2, equipo.getCODCAT());
             ps.setString(3, equipo.getPRECEQUI());
             ps.setString(4, equipo.getCANTEQUI());
             ps.setString(5, "A");
@@ -82,7 +82,7 @@ public class EquipoImpl extends Conexion implements IEquipo {
                 equipo = new Equipo();
                 equipo.setCODEQUI(rs.getInt("CODEQUI"));
                 equipo.setNOMEQUI(rs.getString("NOMEQUI"));
-                equipo.setCATEQUI(rs.getString("CATEQUI"));
+                equipo.setCODCAT(rs.getString("CODCAT"));
                 equipo.setPRECEQUI(rs.getString("PRECEQUI"));
                 equipo.setCANTEQUI(rs.getString("CANTEQUI"));
                 listado.add(equipo);

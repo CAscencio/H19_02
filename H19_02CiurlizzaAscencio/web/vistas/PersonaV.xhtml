@@ -91,7 +91,7 @@
                 </h:form>
 
                 <h:form id="Dialogo">
-                    <p:dialog id="DialogoE" widgetVar="WDialogoE" modal="true" >
+                    <p:dialog id="DialogoE" widgetVar="WDialogoE" modal="true" style="font-size: 0.85em;" header="MODIFICAR">
                         <p:panelGrid id="Datos" columns="4">
                             <p:outputLabel value="NOMBRES :"/><p:inputText value="#{personaC.persona.NOMPER}"/>
                             <p:outputLabel value="APELLIDOS :"/><p:inputText value="#{personaC.persona.APEPER}"/>
@@ -112,17 +112,21 @@
                                 <f:selectItem itemLabel="Femenino" itemValue="F"/>
                             </p:selectOneRadio>                    
                         </p:panelGrid>
-                        <p:commandButton value="Modificar" actionListener="#{personaC.modificar()}" update=":dos,Dialogo,:uno">
-                            <p:confirm header="Confirmacion" message="¿Confirmar?"/>
-                        </p:commandButton>
-                        <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('WDialogoE').hide();"/>
+                        <center>
+                            <p:commandButton value="Modificar" actionListener="#{personaC.modificar()}" update=":dos,Dialogo,:uno">
+                                <p:confirm header="Confirmacion" message="¿Confirmar?"/>
+                            </p:commandButton>
+                            <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('WDialogoE').hide();"/>
+                        </center>
                     </p:dialog>
                 </h:form>        
 
                 <h:form>
                     <p:confirmDialog global="true">
-                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes"/>
-                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"/>
+                        <center>
+                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" style="font-size: 0.85em;"/>
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" style="font-size: 0.85em;"/>
+                        </center>
                     </p:confirmDialog>
                 </h:form>
             </ui:define>

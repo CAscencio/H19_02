@@ -25,7 +25,10 @@
                         <p:menuitem value="Cliente" url="/faces/vistas/Cliente.xhtml" icon="ui-icon-person" />
                     </p:submenu>
                     <p:menuitem value="Sucursal" outcome="/faces/vistas/SucursalV.xhtml" icon="ui-icon-check"/>
-                    <p:menuitem value="Producto" outcome="/faces/vistas/EquipoV.xhtml" icon="ui-icon-suitcase"/>
+                    <p:submenu label="Producto" icon="ui-icon-person">
+                        <p:menuitem value="Categoria" outcome="/faces/vistas/Categoria.xhtml" icon="ui-icon-suitcase"/>
+                        <p:menuitem value="Producto" outcome="/faces/vistas/EquipoV.xhtml" icon="ui-icon-suitcase"/>
+                    </p:submenu>
                     <p:menuitem value="Venta" outcome="/faces/vistas/VentasV.xhtml"  icon="ui-icon-check"/>
                     <p:menuitem value="Historial" outcome="/faces/vistas/VentasV.xhtml" icon="ui-icon-check" />
 
@@ -47,7 +50,7 @@
         <div id="bottom">
             <ui:insert name="bottom"></ui:insert>
             <p:panel header="&copy; Sis. Ventas - Ascencio - 2019" style="text-align: center;">
-                
+
             </p:panel>
 
         </div>

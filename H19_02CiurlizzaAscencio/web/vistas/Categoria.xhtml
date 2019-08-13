@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Categorias</title>  
+
+    </h:head>
+    <h:body>
+        <ui:composition template="./../Plantilla/Plantilla.xhtml">
+
+            <ui:define name="content">
+                <center>
+                    <h2>REGISTRO DE CATEGORIAS</h2>
+                </center>
+                <p:growl autoUpdate="true" showDetail="true" id="mensaje"/>
+                <h:form id="uno">
+                    <center>
+                        <p:panelGrid id="Datos" columns="4" styleClass="ui-panelgrid-blank" style="font-size: 0.85em;">
+                            <p:outputLabel value="NOMBRE :"/>
+                            <p:inputText value="#{categoriaC.categoria.NOMCAT}"/>
+                        </p:panelGrid>
+                        <br/>
+                        <p:commandButton value="Registrar" actionListener="#{categoriaC.registrar()}" update=":dos,mensaje,Datos" style="font-size: 0.85em;"/>
+                        <p:commandButton value="limpiar" actionListener="#{categoriaC.limpiar()}" update="uno" style="font-size: 0.85em;"/>
+                    </center>
+                </h:form>                
+                <p:spacer/>
+                <h:form id="dos">
+                    <p:dataTable id="DatosL" 
+                                 paginator="true" 
+                                 value="#{categoriaC.listcategoria}" 
+                                 var="lista"
+                                 rows="10"
+                                 style="margin-bottom:20px">
+
+                        <p:column headerText="N°" style="width:4%;font-size: 0.85em;">
+                            <h:outputText value="#{lista.CODCAT}" style="text-align: center"/>
+                        </p:column>
+                        <p:column headerText="NOMBRE" style="font-size: 0.85em;">
+                            <h:outputText value="#{lista.NOMCAT}"/>
+                        </p:column>
+                        <p:column headerText="ACCIONES" style="font-size: 0.85em;">
+                            <center>
+                                <p:commandButton value="Modificar" oncomplete="PF('WDialogoE').show();" update=":Dialogo">
+                                    <f:setPropertyActionListener value="#{lista}" target="#{categoriaC.categoria}"/>
+                                </p:commandButton>
+                                <p:commandButton value="Eliminar" actionListener="#{categoriaC.eliminar(lista)}"/>
+                            </center>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+
+                <h:form id="Dialogo">
+                    <p:dialog id="DialogoE" widgetVar="WDialogoE" modal="true" >
+                        <p:panelGrid id="Datos" columns="4">
+                            <p:outputLabel value="NOMBRE :"/>
+                            <p:inputText value="#{categoriaC.categoria.NOMCAT}"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Modificar" actionListener="#{categoriaC.modificar()}" update=":dos,Dialogo,:uno">
+                            <p:confirm header="Confirmacion" message="¿Confirmar?"/>
+                        </p:commandButton>
+                        <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('WDialogoE').hide();"/>
+                    </p:dialog>
+                </h:form>        
+
+                <h:form>
+                    <p:confirmDialog global="true">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes"/>
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"/>
+                    </p:confirmDialog>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+

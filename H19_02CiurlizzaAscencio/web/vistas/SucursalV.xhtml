@@ -62,7 +62,6 @@
                         </p:panelGrid>
                         <br/>
                         <p:commandButton value="Editar" actionListener="#{sucursalC.modificar()}" update=":dos,tres">
-                            <f:setPropertyActionListener value="#{lista}" target="#{sucursalC.sucursal}"/>
                             <p:confirm header="Confirmacion" message="Confirmar ?"/>
                         </p:commandButton>
                         <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('WDatosD').hide();"/>
